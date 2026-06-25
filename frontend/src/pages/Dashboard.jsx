@@ -39,7 +39,7 @@ export default function Dashboard() {
 const handleDelete = async (id) => {
     await API.delete('/expenses/' + id);
     fetchExpenses();
-
+};
 const [filter, setFilter] = useState('all');
 
 const visible = filter === 'all'
@@ -112,4 +112,3 @@ return (
     </ul>
   </div>
 );
-}

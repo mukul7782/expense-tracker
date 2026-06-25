@@ -52,6 +52,22 @@ const visible = filter === 'all'
 //   <option value="food">Food</option>
 //   <option value="travel">Travel</option>
 // </select>
+const total = expenses.reduce(
+  (sum, exp) => sum + Number(exp.amount || 0),
+  0
+);
+
+const thisMonthTotal = expenses
+  .filter((exp) => {
+    const expenseDate = new Date(exp.createdAt);
+    const today = new Date();
+
+    return (
+      expenseDate.getMonth() === today.getMonth() &&
+      expenseDate.getFullYear() === today.getFullYear()
+    );
+  })
+  .reduce((sum, exp) => sum + Number(exp.amount || 0), 0);
   };
 
 return (

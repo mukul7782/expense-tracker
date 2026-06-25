@@ -54,24 +54,46 @@ const visible = filter === 'all'
 // </select>
   };
 
-  return (
-    <div>
-      <h2>Dashboard</h2>
-      <form onSubmit={handleAdd}>
-        <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-        <input placeholder="Amount" type="number" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} />
-        <input placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
-        <button type="submit">Add expense</button>
-      </form>
+return (
+  <div className="container">
+    <h2>Expense dashboard</h2>
 
-      <ul>
-        {expenses.map((exp) => (
-          <li key={exp._id}>
-            {exp.title} - Rs.{exp.amount} ({exp.category})
-            <button onClick={() => handleDelete(exp._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div className="summary-cards">
+      <div className="summary-card">
+        <div className="summary-label">Total spent</div>
+        <div className="summary-value">₹{total}</div>
+      </div>
+      <div className="summary-card">
+        <div className="summary-label">Transactions</div>
+        <div className="summary-value">{expenses.length}</div>
+      </div>
+      <div className="summary-card">
+        <div className="summary-label">This month</div>
+        <div className="summary-value">₹{thisMonthTotal}</div>
+      </div>
     </div>
-  );
+
+    <form onSubmit={handleAdd} className="expense-form card">
+      <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+      <input placeholder="Amount" type="number" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} />
+      <input placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
+      <button type="submit" className="btn-primary">Add</button>
+    </form>
+
+    <ul className="expense-list">
+      {expenses.map((exp) => (
+        <li key={exp._id} className="expense-item">
+          <div className="expense-info">
+            <span className="expense-title">{exp.title}</span>
+            <span className="category-tag">{exp.category}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span className="expense-amount">₹{exp.amount}</span>
+            <button className="btn-danger" onClick={() => handleDelete(exp._id)}>Delete</button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 }

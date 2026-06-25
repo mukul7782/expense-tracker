@@ -68,7 +68,7 @@ const thisMonthTotal = expenses
     );
   })
   .reduce((sum, exp) => sum + Number(exp.amount || 0), 0);
-  };
+
 
 return (
   <div className="container">
@@ -112,3 +112,4 @@ return (
     </ul>
   </div>
 );
+};

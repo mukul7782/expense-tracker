@@ -11,8 +11,9 @@ export default function Register() {
     e.preventDefault();
     setError('');
     try {
-      await API.post('/auth/register', form);
-      navigate('/');
+      const { data } = await API.post('/auth/register', form);
+      localStorage.setItem('token', data.token);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
